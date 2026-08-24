@@ -473,6 +473,78 @@ p { color: var(--color-warm-grey); }
 
 .hero-media { border-radius: 0; }
 
+/* Real photo containers reuse the same sizing rules as their placeholder
+   equivalents, but hold an actual <img> instead of a CSS placeholder. */
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-media.photo,
+.hero-media.photo img {
+  border-radius: 0;
+}
+
+/* Dark scrim so the white hero heading/text stays readable over a bright
+   real photo (rather than the flat navy gradient a placeholder had). */
+.hero-media.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 42, 58, 0.55) 0%, rgba(28, 42, 58, 0.45) 40%, rgba(28, 42, 58, 0.88) 100%);
+}
+
+/* Small badge shown on stock/illustrative photography that is not of the
+   real Adcote House property, per the site owner's request to be transparent
+   about this until real photography is available. */
+.photo-tag {
+  position: absolute;
+  left: var(--space-xs);
+  bottom: var(--space-xs);
+  right: var(--space-xs);
+  background-color: rgba(28, 42, 58, 0.78);
+  color: var(--color-cream);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  line-height: 1.35;
+}
+
+.photo-tag-main {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gold-light);
+}
+
+.photo-tag-sub {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-cream);
+}
+
+/* Small attribution caption for real, freely-licensed location photography
+   (e.g. Geograph / Wikimedia Commons contributors, credited under CC BY-SA). */
+.photo-credit {
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--color-warm-grey-light);
+  text-align: right;
+}
+
+.photo-credit a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .room-image {
   aspect-ratio: 4 / 3;
   border-radius: var(--radius) var(--radius) 0 0;

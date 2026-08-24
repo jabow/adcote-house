@@ -81,48 +81,74 @@ Repository: https://github.com/jabow/adcote-house
    - Choose the `main` branch and the `/ (root)` folder, then **Save**
    - GitHub will publish the site at `https://jabow.github.io/adcote-house/`
 
-## Replacing the Placeholder Images
+## About the Current Images
 
-Every image area on the site currently shows a navy placeholder block with
-the text **"NEW PHOTOGRAPHY COMING SOON"**. These are plain `<div>`
-elements styled in CSS (see the `.placeholder-image` and
-`.placeholder-overlay` rules in `styles.css`), not `<img>` tags, so they
-never show a broken-image icon while you're waiting on real photography.
+Until Adcote House has its own full photography set, this site uses three
+tiers of imagery, all stored in `assets/images/placeholders/`:
 
-To swap a placeholder for a real photo:
+1. **Real Adcote House photography** — `exterior.jpg` and
+   `great-orme-view.jpg` were sourced directly from the guest house's own
+   existing website (adcotehouse.co.uk). These need no disclaimer and are
+   used as-is (hero banner, gallery, and the "Great Orme" discovery card).
+2. **Real, freely-licensed Llandudno location photography** —
+   `promenade.jpg`, `beach.jpg` and `coastal-cliffs.jpg` are genuine photos
+   of Llandudno and the Great Orme, sourced from **Geograph Britain and
+   Ireland** via Wikimedia Commons and used under the **CC BY‑SA 2.0**
+   licence. Each is credited on the page directly beneath the image (see
+   the `.photo-credit` elements in `index.html`), and the licence requires
+   this attribution to stay in place if the images are kept. If you have
+   your own photos of these locations, swap these out and remove the
+   credit lines.
+3. **Generic stock photography ("illustrative")** — all room, breakfast,
+   lounge, hallway, dining and restaurant/walking-route images are
+   free-to-use stock photos (from Pexels) that are **not** of Adcote House
+   itself. Each one carries a small dark badge reading *"Illustrative
+   photo — not Adcote House"* plus *"Real photography coming soon"*, so
+   visitors are never misled into thinking these are the real rooms. This
+   was a deliberate choice while waiting on a professional photographer —
+   remove the badge only once it is replaced with a genuine photo.
 
-1. Add your image file to `assets/images/placeholders/` (or `logo/` for
-   the site logo). Use descriptive file names, e.g. `exterior-front.jpg`,
-   `double-room.jpg`, `breakfast-room.jpg`.
-2. In `index.html`, find the placeholder block you want to replace. Each
-   one looks like this:
+The Location section's map is still a plain "MAP COMING SOON" placeholder
+(a styled `<div>`, not an image) — swap it for a real embedded map when
+ready (see below).
+
+## Replacing a Photo
+
+1. Add your new image file to `assets/images/placeholders/` (or `logo/`
+   for the site logo). Use a descriptive file name, e.g. `double-room.jpg`.
+2. In `index.html`, find the `<img>` you want to replace. A stock/generic
+   photo looks like this — note the `.photo-tag` badge sitting alongside
+   the image inside the same `.photo` wrapper:
 
    ```html
-   <div class="placeholder-image room-image">
-     <div class="placeholder-overlay">
-       <p class="placeholder-text">NEW PHOTOGRAPHY COMING SOON</p>
-       <p class="placeholder-subtext">Double Room</p>
+   <div class="photo room-image">
+     <img src="assets/images/placeholders/room-double-stock.jpg" alt="...">
+     <div class="photo-tag">
+       <span class="photo-tag-main">Illustrative photo &mdash; not Adcote House</span>
+       <span class="photo-tag-sub">Real photography coming soon</span>
      </div>
    </div>
    ```
 
-3. Replace it with a real `<img>`, keeping the existing class name (e.g.
-   `room-image`, `destination-image`, `hero-media`) so it keeps the same
-   size, rounded corners and shadow:
-
-   ```html
-   <img src="assets/images/placeholders/double-room.jpg"
-        alt="Double room at Adcote House with a comfortable bed and warm lighting"
-        class="room-image">
-   ```
-
-4. Always write a clear, descriptive `alt` attribute — this matters for
+3. Update the `src` to your new file, write an accurate `alt` description,
+   and **delete the whole `.photo-tag` div** — it should only appear on
+   images that are not genuinely of Adcote House. Leave the surrounding
+   `.photo` wrapper and its second class (`room-image`, `destination-image`,
+   `hero-media`, `masonry-item`, `split-image`, etc.) in place, as that is
+   what controls size, rounded corners and cropping.
+4. If you are replacing one of the credited Llandudno location photos,
+   also delete the `<p class="photo-credit">...</p>` line beneath it.
+5. Always write a clear, descriptive `alt` attribute — this matters for
    accessibility and for SEO.
-5. Recommended image sizes for best performance and sharpness:
+6. Recommended image sizes for best performance and sharpness:
    - Hero background: at least 1920×1080px
    - Room / gallery / destination photos: at least 1200×900px
    - Compress photos before uploading (e.g. with Squoosh or TinyPNG) so
-     the site stays fast-loading.
+     the site stays fast-loading. Some of the sourced images currently in
+     this repo are larger than ideal (400–800KB) because no image
+     compression tool was available when they were added — recompressing
+     them (or replacing them with final photography) will speed up the
+     site further.
 
 ## Changing Text Content
 
