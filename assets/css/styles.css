@@ -492,6 +492,15 @@ p { color: var(--color-warm-grey); }
   border-radius: 0;
 }
 
+/* .photo sets position:relative for every other use of this class, but the
+   hero image specifically needs to stay position:absolute (set by
+   .hero-media) so it fills the whole hero section — restate it here with
+   the two-class selector so it reliably wins the cascade. */
+.hero-media.photo {
+  position: absolute;
+  inset: 0;
+}
+
 /* Dark scrim so the white hero heading/text stays readable over a bright
    real photo (rather than the flat navy gradient a placeholder had). */
 .hero-media.photo::after {
@@ -503,17 +512,20 @@ p { color: var(--color-warm-grey); }
 
 /* Small badge shown on stock/illustrative photography that is not of the
    real Adcote House property, per the site owner's request to be transparent
-   about this until real photography is available. */
+   about this until real photography is available. Centred over the photo. */
 .photo-tag {
   position: absolute;
-  left: var(--space-xs);
-  bottom: var(--space-xs);
-  right: var(--space-xs);
-  background-color: rgba(28, 42, 58, 0.78);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - (var(--space-sm) * 2));
+  max-width: 260px;
+  background-color: rgba(28, 42, 58, 0.82);
   color: var(--color-cream);
-  padding: 0.5rem 0.75rem;
+  padding: 0.65rem 0.9rem;
   border-radius: var(--radius-sm);
   line-height: 1.35;
+  text-align: center;
 }
 
 .photo-tag-main {
